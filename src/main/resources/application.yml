@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/group
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  messages:
+    basename: messages,errors
+
+  jpa:
+    hibernate:
+      ddl-auto: create  # 이 옵션은 애플리케이션 실행 시점에 테이블을 drop 하고, 다시 생성
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        default_batch_fetch_size: 100
+#    open-in-view: false
+
+logging:
+  level:
+    org.hibernate.SQL: debug  # logger를 통해 하이버네이트 실행 SQL을 남긴다.
+    org.hibernate.type: trace
+
+
+server:
+  servlet:
+    session:
+      tracking-modes: cookie

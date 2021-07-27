@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Round#</th>
+                <th>그룹 & 회원 Count</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="entry : ${form.groupsPerRound}">
+                <tr>
+                    <td>
+                        <a th:href="|/groups/${entry.key}|" th:text="|${entry.key}회차|"></a>
+                    </td>
+                    <td class="align-middle"
+                        th:text="|그룹 - ${entry.value.size}개 / 회원 - ${form.membersPerRound[__${entry.key}__]}명|"></td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+</html>

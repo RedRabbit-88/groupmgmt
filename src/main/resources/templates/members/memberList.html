@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>이름</th>
+                <th>E-Mail</th>
+                <th>도시</th>
+                <th>지역구</th>
+                <th>우편번호</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="member : ${members}">
+                <td th:text="${member.id}"></td>
+                <td><a th:text="${member.name}" th:href="@{/members/{memberId}/update (memberId=${member.id})}"></a></td>
+                <td th:text="${member.email}"></td>
+                <td th:text="${member.address?.city}"></td>
+                <td th:text="${member.address?.district}"></td>
+                <td th:text="${member.address?.zipCode}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+
+</html>

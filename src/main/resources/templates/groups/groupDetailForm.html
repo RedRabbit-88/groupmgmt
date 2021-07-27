@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <form th:action=@{/groups/create} method="post" th:object="${groupDetailForm}">
+    <div class="container">
+        <div class="row">
+            <button class="btn btn-primary" th:if="${groupDetailForm.groups[0].id} == null">Save</button>
+        </div>
+        <div class="row">
+            <div class="col">회원 수 : </div>
+            <div class="col-10" th:text="${groupDetailForm.memberCnt}"></div>
+        </div>
+        <div class="row">
+            <div class="col">조 개수 : </div>
+            <div class="col-10" th:text="${groupDetailForm.groups.size}"></div>
+        </div>
+    </div>
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>그룹#</th>
+                <th>회원 이름</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="group : ${groupDetailForm.groups}">
+                <tr>
+                    <td class="align-middle"
+                        th:text="|${group.groupSeq}조 - (${group.memberGroups.size}명)|"></td>
+                    <td th:text="${groupDetailForm.membersPerGroup[__${group.groupSeq}__]}"></td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+    </form>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+
+</html>

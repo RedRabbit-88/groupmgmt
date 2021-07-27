@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+</head>
+
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <form th:action=@{/groups/new/} method="post" th:object="${groupCreateForm}">
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p class="field-error" th:each="err : ${#fields.globalErrors()}"
+               th:text="${err}">전체 오류 메시지</p>
+        </div>
+
+        <div class="field-error" th:errors="*{groupCnt}">Incorrect group count</div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">조 개수</span>
+            <input th:field="*{groupCnt}" type="number" placeholder="나눌 조 개수(숫자)"
+                   class="form-control"
+                   th:errorclass="field-error">
+            <button class="btn btn-primary">Submit</button>
+        </div>
+
+        <div class="field-error" th:errors="*{memberCnt}">Incorrect member count</div>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">회원 수 : </label>
+            <div class="col-sm-9">
+                <input class="form-control-plaintext" th:field="*{memberCnt}" th:value="${memberCnt}?: 0" type="number" readonly>
+            </div>
+        </div>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th><input type="checkbox" name="checkAll" id="checkAll" onclick="selectAll(this)"/></th>
+                    <th>이름</th>
+                    <th>E-Mail</th>
+                    <th>도시</th>
+                    <th>지역구</th>
+                    <th>우편번호</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="member : ${members}">
+                    <td>
+                        <input type="checkbox"
+                               th:onclick="selectMember()"
+                               th:value="${member.id}"
+                               th:field="*{members}"/>
+                    </td>
+                    <td th:text="${member.name}"></td>
+                    <td th:text="${member.email}"></td>
+                    <td th:text="${member.address?.city}"></td>
+                    <td th:text="${member.address?.district}"></td>
+                    <td th:text="${member.address?.zipCode}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+<script th:inline="javascript">
+function selectAll(source) {
+    var checkboxes = document.getElementsByName('members');
+    for (var i=0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = source.checked;
+    }
+    selectMember();
+};
+
+function selectMember() {
+    var checkboxes = document.getElementsByName('members');
+
+    var memberCnt = 0;
+    for (var i=0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked)
+        memberCnt++;
+    }
+
+    document.getElementById('memberCnt').value = memberCnt;
+}
+</script>
+</html>

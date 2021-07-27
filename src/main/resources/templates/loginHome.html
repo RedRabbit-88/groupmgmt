@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>Hello 15YA</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <div class="row">
+        <div class="col">
+            <h4 class="mb-3" th:text="|로그인: ${user.name}|">로그인 사용자 이름</h4>
+        </div>
+        <div class="col">
+            <form th:action="@{/logout}" method="post">
+                <button class="w-50 btn btn-secondary btn-lg"
+                        type="submit"
+                        onclick="location.href='home.html'">로그아웃</button>
+            </form>
+        </div>
+    </div>
+    <div class="jumbotron">
+        <p class="lead">회원 관리 기능</p>
+        <p>
+            <a class="btn btn-lg btn-secondary" href="/members/new">회원 가입</a>
+            <a class="btn btn-lg btn-secondary" href="/members">회원 목록</a>
+        </p>
+        <p class="lead">마니또 기능</p>
+        <p>
+            <a class="btn btn-lg btn-dark" href="/secretAngels/new">마니또 시작</a>
+            <a class="btn btn-lg btn-dark" href="/secretAngels/history">마니또 결과</a>
+        </p>
+        <p class="lead">조 편성 기능</p>
+        <p>
+            <a class="btn btn-lg btn-info" href="/groups/new">조 편성 시작</a>
+            <a class="btn btn-lg btn-info" href="/groups">조 편성 결과</a>
+        </p>
+    </div>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+</html>
