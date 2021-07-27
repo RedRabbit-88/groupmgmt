@@ -34,6 +34,7 @@ public class LoginController {
             HttpServletRequest request,
             @RequestParam(defaultValue = "/", name = "redirectURL") String redirectURL
     ) {
+        // Check if user is valid
         User loginUser = loginService.login(form.getLoginId(), form.getPassword());
 
         if (loginUser == null) {
