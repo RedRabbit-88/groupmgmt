@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -125,14 +124,7 @@ public class GroupController {
         for (Group group : findGroups) {
             memberCnt += group.getMemberGroups().size();
 
-            // 해당 Group의 Member 이름을 A / B 형식으로 생성
-            String memberNames = group.getMemberGroups().stream()
-                    .map(mb -> mb.getMember().getName())
-                    .sorted()
-                    .collect(Collectors.joining(" / "));
-
-            // Group.id - MemberNames 로 맵에 입력
-            membersPerGroup.put(group.getGroupSeq(), memberNames);
+            createMembersPerGroupFromGroup(membersPerGroup, group);
         }
 
         GroupDetailForm form = new GroupDetailForm();
@@ -140,6 +132,17 @@ public class GroupController {
         form.setMemberCnt(memberCnt);
         form.setMembersPerGroup(membersPerGroup);
         return form;
+    }
+
+    private void createMembersPerGroupFromGroup(Map<Long, String> membersPerGroup, Group group) {
+        // 해당 Group의 Member 이름을 A / B 형식으로 생성
+        String memberNames = group.getMemberGroups().stream()
+                .map(mb -> mb.getMember().getName())
+                .sorted()
+                .collect(Collectors.joining(" / "));
+
+        // Group.id - MemberNames 로 맵에 입력
+        membersPerGroup.put(group.getGroupSeq(), memberNames);
     }
 
     private Map<Long, Long> getMembersPerRound(Map<Long, List<Group>> groupsPerRound) {
