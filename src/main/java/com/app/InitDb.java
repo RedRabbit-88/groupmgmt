@@ -1,6 +1,6 @@
 package com.app;
 
-import com.app.domain.Address;
+import com.app.domain.user.Address;
 import com.app.domain.member.Member;
 import com.app.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;

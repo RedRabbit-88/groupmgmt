@@ -1,7 +1,8 @@
 package com.app.domain.member;
 
-import com.app.domain.Address;
-import com.app.domain.HateFood;
+import com.app.domain.file.UploadFile;
+import com.app.domain.user.Address;
+import com.app.domain.user.HateFood;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,6 +43,10 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<HateFood> hateFoodList = new ArrayList<>();
 
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "uploadFile_id")
+    private UploadFile uploadFile;
+
     // 생성자
     @Builder
     public Member(Long id, String name, Address address, String email) {
@@ -62,6 +67,11 @@ public class Member {
 
     public void changeEmail(String email) {
         this.email = email;
+    }
+
+    public void changeUploadFile(UploadFile uploadFile) {
+        uploadFile.changeMember(this);
+        this.uploadFile = uploadFile;
     }
 
     public void deleteMember() {

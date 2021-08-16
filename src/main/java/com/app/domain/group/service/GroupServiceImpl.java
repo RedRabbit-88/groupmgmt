@@ -3,7 +3,7 @@ package com.app.domain.group.service;
 import com.app.domain.group.Group;
 import com.app.domain.group.repository.GroupRepository;
 import com.app.domain.member.Member;
-import com.app.domain.MemberGroup;
+import com.app.domain.membergroup.MemberGroup;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

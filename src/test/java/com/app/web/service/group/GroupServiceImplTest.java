@@ -1,6 +1,6 @@
 package com.app.web.service.group;
 
-import com.app.domain.Address;
+import com.app.domain.user.Address;
 import com.app.domain.group.Group;
 import com.app.domain.member.Member;
 import com.app.domain.group.service.GroupService;

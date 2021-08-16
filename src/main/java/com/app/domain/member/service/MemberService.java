@@ -1,13 +1,14 @@
 package com.app.domain.member.service;
 
-import com.app.web.member.form.MemberForm;
 import com.app.domain.member.Member;
+import com.app.web.member.form.MemberAddForm;
 import com.app.web.member.form.MemberSearch;
+import com.app.web.member.form.MemberUpdateForm;
 
 import java.util.List;
 
 public interface MemberService {
-    
+
     // 조회 기능
     List<Member> findAll();
     Member findById(Long memberId);
@@ -18,9 +19,8 @@ public interface MemberService {
     Long join(Member member);
 
     // 수정 기능
-    void updateMember(Long memberId, MemberForm memberForm);
+    void updateMember(Member member, MemberUpdateForm memberForm);
 
     // 삭제 기능
     void delete(Member member);
-
 }

@@ -1,4 +1,4 @@
-package com.app.domain;
+package com.app.domain.user;
 
 import com.app.domain.member.Member;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.app.domain;
+package com.app.domain.user;
 
 import lombok.Builder;
 import lombok.Getter;

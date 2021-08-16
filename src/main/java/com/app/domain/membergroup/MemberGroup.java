@@ -1,4 +1,4 @@
-package com.app.domain;
+package com.app.domain.membergroup;
 
 import com.app.domain.group.Group;
 import com.app.domain.member.Member;

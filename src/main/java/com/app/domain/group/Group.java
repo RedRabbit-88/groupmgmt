@@ -1,6 +1,6 @@
 package com.app.domain.group;
 
-import com.app.domain.MemberGroup;
+import com.app.domain.membergroup.MemberGroup;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

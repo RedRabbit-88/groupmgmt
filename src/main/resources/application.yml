@@ -27,3 +27,6 @@ server:
   servlet:
     session:
       tracking-modes: cookie
+
+file:
+  dir: D:/groupmgmt/file/

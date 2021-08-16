@@ -1,6 +1,6 @@
 package com.app.web.service;
 
-import com.app.domain.Address;
+import com.app.domain.user.Address;
 import com.app.domain.member.Member;
 import com.app.domain.member.repository.MemberRepository;
 import com.app.domain.member.service.MemberService;

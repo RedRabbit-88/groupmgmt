@@ -1,6 +1,6 @@
 package com.app.web.member.form;
 
-import com.app.domain.Address;
+import com.app.domain.user.Address;
 import lombok.Getter;
 import lombok.Setter;
 

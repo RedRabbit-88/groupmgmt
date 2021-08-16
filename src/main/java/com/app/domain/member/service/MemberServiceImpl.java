@@ -1,10 +1,11 @@
 package com.app.domain.member.service;
 
+import com.app.domain.file.FileStore;
 import com.app.domain.member.Member;
 import com.app.domain.member.repository.MemberRepository;
-import com.app.web.member.form.MemberForm;
-import com.app.domain.Address;
+import com.app.domain.user.Address;
 import com.app.web.member.form.MemberSearch;
+import com.app.web.member.form.MemberUpdateForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,37 +54,25 @@ public class MemberServiceImpl implements MemberService {
     @Override
     @Transactional
     public Long join(Member member) {
-        validationDuplicateMemberByName(member);
         memberRepository.save(member);
         return member.getId();
     }
 
     @Transactional
     @Override
-    public void updateMember(Long memberId, MemberForm memberForm) {
-        Member findMember = memberRepository.findById(memberId);
+    public void updateMember(Member member, MemberUpdateForm memberForm) {
+        member.changeName(memberForm.getName());
+        member.changeEmail(memberForm.getEmail());
+        changeAddressOfMemberWithForm(memberForm, member);
+    }
 
-        findMember.changeName(memberForm.getName());
-        findMember.changeEmail(memberForm.getEmail());
-
+    private void changeAddressOfMemberWithForm(MemberUpdateForm memberForm, Member findMember) {
         Address address = Address.builder()
                 .city(memberForm.getCity())
                 .district(memberForm.getDistrict())
                 .zipCode(memberForm.getZipCode())
                 .build();
         findMember.changeAddress(address);
-    }
-
-    /**
-     * 같은 이름으로 존재하는 회원이 있는지 확인
-     *
-     * @param member : 멤버 엔티티
-     */
-    private void validationDuplicateMemberByName(Member member) {
-        List<Member> findMembers = memberRepository.findByName(member.getName());
-        if (!findMembers.isEmpty()) {
-            throw new IllegalStateException("같은 이름으로 회원이 존재합니다.");
-        }
     }
 
     /**

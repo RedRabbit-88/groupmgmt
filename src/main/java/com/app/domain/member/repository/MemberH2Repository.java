@@ -1,6 +1,6 @@
 package com.app.domain.member.repository;
 
-import com.app.domain.Address;
+import com.app.domain.user.Address;
 import com.app.domain.member.Member;
 import com.app.web.member.form.MemberSearch;
 import com.querydsl.core.types.dsl.BooleanExpression;

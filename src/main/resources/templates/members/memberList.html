@@ -10,6 +10,7 @@
             <thead>
             <tr>
                 <th>#</th>
+                <th>사진</th>
                 <th>이름</th>
                 <th>E-Mail</th>
                 <th>도시</th>
@@ -20,6 +21,7 @@
             <tbody>
             <tr th:each="member : ${members}">
                 <td th:text="${member.id}"></td>
+                <td><img th:src="|/members/images/${member.getUploadFile()?.getStoreFileName()}|" width="100" height="100"/></td>
                 <td><a th:text="${member.name}" th:href="@{/members/{memberId}/update (memberId=${member.id})}"></a></td>
                 <td th:text="${member.email}"></td>
                 <td th:text="${member.address?.city}"></td>
