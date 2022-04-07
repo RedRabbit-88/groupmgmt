@@ -11,7 +11,7 @@ import org.springframework.util.StringUtils;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-import static com.app.domain.QMember.*;
+import static com.app.domain.member.QMember.*;
 
 @Repository
 public class MemberH2Repository implements MemberRepository {
